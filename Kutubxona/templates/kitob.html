@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+        {% if object_list %}
+            {% for kitob in object_list %}
+                <li><h2>{{kitob.name}}</h2> {{kitob.discription}}</li> </br>
+            {% endfor %}
+        {% else %}
+            <h1>Bu sahifa bo'sh. Nimadir qo'shish uchun admin paneliga kirib qo'shing</h1>
+        {% endif %}
+
+        <h4> yana qandaydir ma'lumot qo'shish uchun /admin paneliga kiring </h4>
+    {% endblock content %}
+</body>
+</html>
