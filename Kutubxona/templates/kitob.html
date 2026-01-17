@@ -7,11 +7,16 @@
 </head>
 <body>
     {% extends 'base.html' %}
+    {% load static %}
 
     {% block content %}
         {% if object_list %}
             {% for kitob in object_list %}
-            <li><h2>{{kitob.nomi}}</h2> {{kitob.muallif}}, {{kitob.nashr_yili}}, {{kitob.kitob_turi}}, </li> </br> <a href="{{ kitob.kitob_linki }}">Kitobga o'tish</a>
+            <li>
+                <h2>{{kitob.nomi}}</h2> 
+                {{kitob.muallif}}, {{kitob.nashr_yili}}, {{kitob.kitob_turi}}
+                <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;">
+            </li> </br> <a href="{{ kitob.kitob_linki }}">Kitobga o'tish</a> <a href="{{ kitob.file.url }}">Yuklab olish</a> <a href="{% static 'images/' %}{{ kitob.image }}">Yuklab olish (rasm)</a>
             {% endfor %}
         {% else %}
             <h1>Bu sahifa bo'sh. Nimadir qo'shish uchun admin paneliga kirib qo'shing</h1>
