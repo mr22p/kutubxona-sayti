@@ -18,3 +18,7 @@ class KitobListView(ListView):
     model = Kitob
     template_name = "kitob.html"
     
+def narxlar_page(request):
+    kitoblar = Kitob.objects.all() 
+    # 'prices.html' o'rniga 'narxlar.html' deb yozing
+    return render(request, 'narxlar.html', {'kitoblar': kitoblar})
