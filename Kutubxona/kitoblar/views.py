@@ -1,3 +1,8 @@
+from django.shortcuts import render
+from .models import Kitob
+
 def narxlar_page(request):
-    kitoblar = Kitob.objects.all() # Bazadagi barcha kitoblarni olish
-    return render(request, 'prices.html', {'kitoblar': kitoblar})
+    kitoblar = Kitob.objects.all()
+    return render(request, 'narxlar.html', {'kitoblar': kitoblar})
+
+
