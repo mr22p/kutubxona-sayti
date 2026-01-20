@@ -14,12 +14,53 @@
             {% for kitob in object_list %}
             <li>
                 <h2>{{kitob.nomi}}</h2> 
-                {{kitob.muallif}}, {{kitob.nashr_yili}}, {{kitob.kitob_turi}}
+                {{kitob.muallif}}, {{kitob.nashr_yili}}, {{kitob.kitob_turi}}, Narxi: {{ kitob.kitob_narxi }} USD <br>
                 <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;">
-            </li> </br> <a href="{{ kitob.kitob_linki }}">Kitobga o'tish</a> <a href="{{ kitob.file.url }}">Yuklab olish</a> <a href="{% static 'images/' %}{{ kitob.image }}">Yuklab olish (rasm)</a>
+
+
+                
+                <!-- Bu yerga yurakchani boshis kodi yozilgan -->
+                <form action="{% url 'yurakcha' kitob.id %}"  method="post">
+                    {% csrf_token %}
+                    {% if kitob.is_favorite %}
+                        <input type="submit" name="yurakcha" id="choice{{forloop.counter}}" value="{{ kitob.id }}" style="display: None;">
+                        <label for="choice{{forloop.counter}}">
+                            <img src="{% static 'images/yurakcha/image.png' %}" alt="YURAKCHA" style="max-width: 30px; max-height: 30px;">
+                        </label>
+                    {% else %}
+                        <input type="submit" name="yurakcha" id="choice{{forloop.counter}}" value="{{ kitob.id }}" style="display: None;">
+                        <label for="choice{{forloop.counter}}">
+                            <img src="{% static 'images/yurakcha/image2.png' %}" alt="YURAKCHA" style="max-width: 30px; max-height: 30px;">
+                        </label>
+
+                    {% endif %}
+                </form>
+                <!-- ######################################## -->
+
+
+
+                
+                <p> <strong>Kitob turi: </strong>{{kitob.kitob_turi}} </p>
+                <p> <strong>Muallif: </strong>{{kitob.muallif}} </p>
+                <p> <strong>Nashr yili: </strong>{{kitob.nashr_yili}} </p>
+                <p> <strong>Kitob linki: </strong>{{kitob.kitob_linki}}</p>
+
+                <a href="{{ kitob.kitob_linki }}">Kitobga o'tish</a> 
+                <a href="{{ kitob.file.url }}">Yuklab olish</a> 
+                <a href="{% static 'images/' %}{{ kitob.image }}">Yuklab olish (rasm)</a>
+                <br>
+                <br>
+            </li>
+
+
             {% endfor %}
         {% else %}
             <h1>Bu sahifa bo'sh. Nimadir qo'shish uchun admin paneliga kirib qo'shing</h1>
         {% endif %}
+
+
+        <h4> yana qandaydir ma'lumot qo'shish uchun /admin paneliga kiring </h4>
     {% endblock content %}
+</body>
+
 </html>

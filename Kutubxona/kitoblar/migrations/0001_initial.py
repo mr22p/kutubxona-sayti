@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
                 ('kitob_linki', models.TextField(blank=True, max_length=200)),
                 ('file', models.FileField(blank=True, null=True, upload_to='kitoblar/')),
                 ('image', models.ImageField(blank=True, null=True, upload_to='kitob_images/')),
+                ('kitob_narxi', models.DecimalField(default=0.00, max_digits=6, decimal_places=2)),
             ],
         ),
     ]
