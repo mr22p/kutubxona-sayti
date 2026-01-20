@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import HomePageView, AboutPageView, FavoritPageView, KitobListView
+from . import views
 
-urlpatterns = [ 
-    path('about/', AboutPageView.as_view(), name='about'),
-    path('', HomePageView.as_view(), name='home'),
-    path('favorit/', FavoritPageView.as_view(), name='favorit'),
-    path('kitoblar/', KitobListView.as_view(), name='kitoblar'),
+urlpatterns = [
+    path('about/', views.AboutPageView.as_view(), name='about'),
+    path('favorit/', views.FavoritPageView.as_view(), name='favorit'),
+    path('kitoblar/', views.KitobListView.as_view(), name='kitoblar'),
+    path('narxlar/', views.narxlar_page, name='narxlar'),
+    path('', views.HomePageView.as_view(), name='home'), # Agar HomePageView klassingiz bo'lsa
 ]
