@@ -7,6 +7,9 @@ from django.urls import reverse
 
 from .models import Kitob
 
+def narxlar_page(request):
+    kitoblar = Kitob.objects.all()
+    return render(request, 'narxlar.html', {'kitoblar': kitoblar})
 
 
 # Create your views here.

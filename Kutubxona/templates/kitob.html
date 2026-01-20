@@ -14,6 +14,7 @@
             {% for kitob in object_list %}
             <li>
                 <h2>{{kitob.nomi}}</h2> 
+                {{kitob.muallif}}, {{kitob.nashr_yili}}, {{kitob.kitob_turi}}, Narxi: {{ kitob.kitob_narxi }} USD <br>
                 <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;">
 
 
