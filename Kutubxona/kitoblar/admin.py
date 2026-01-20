@@ -1,5 +1,7 @@
 from django.contrib import admin
-
-# Register your models here.
-from .models import Kitob 
-admin.site.register(Kitob)
+from .models import Kitob
+# 2. Faqat mana bu qismini qoldiring va narxni ko'rsatish uchun list_display qo'shing:
+@admin.register(Kitob)
+class KitobAdmin(admin.ModelAdmin):
+    # Bu yerda Narxi maydonini kiritganingiz uchun u asosiy ro'yxatda ko'rinadi
+    list_display = ('nomi', 'muallif', 'Narxi')

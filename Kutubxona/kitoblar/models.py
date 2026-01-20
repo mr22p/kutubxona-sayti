@@ -9,6 +9,7 @@ class Kitob(models.Model):
     kitob_linki = models.TextField(max_length=200, blank=True)
     file = models.FileField(upload_to='static/files', blank=True, null=True)
     image = models.ImageField(upload_to='kitoblar', blank=True, null=True)
-    narxi = models.PositiveIntegerField(default=0)
+    narxi = models.IntegerField()
     def __str__(self):
         return self.nomi
+ 

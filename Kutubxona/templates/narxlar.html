@@ -1,11 +1,5 @@
-<h2>Kitoblar narxlari</h2>
-<ul>
-    {% for kitob in kitoblar %}
-        <li>
-            <strong>{{ kitob.nomi }}</strong> - {{ kitob.narxi }} so'm
-        </li>
-    {% empty %}
-        <li>Hozircha kitoblar qo'shilmagan.</li>
-    {% endfor %}
-    <p>Narxi: {{ kitob.narxi }} so'm</p>
-</ul>
+{% for kitob in kitoblar %}
+    <h3>{{ kitob.nomi }}</h3>
+    <p>Muallif: {{ kitob.muallif }}</p>
+    <p>Narxi: {{ kitob.narxi }} so'm</p> 
+{% endfor %}
