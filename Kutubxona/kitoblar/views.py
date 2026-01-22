@@ -43,6 +43,7 @@ def yurakcha(request, yurak_id):
             Kitob,
             pk=request.POST["yurakcha"]
             )
+        target_id = request.POST['yurakcha']
 
     except Kitob.DoesNotExist:
         raise Http404("Yurakcha bilan nimadir xatolik ketti...")
@@ -54,5 +55,5 @@ def yurakcha(request, yurak_id):
 
         tanlangan_yurak.save()
 
-        return HttpResponseRedirect(reverse("kitoblar"))
+        return HttpResponseRedirect(reverse("kitoblar")+'#'+str(target_id))
     

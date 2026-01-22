@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Bu css qism. Scroll qilguncha smooth scroll qilish uchun css ga kod qushildi -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+            /* Optional: Add padding if you have a fixed header that might cover the anchor point */
+            scroll-padding-top: 5rem; 
+        }
+    </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kitoblar</title>
@@ -13,7 +22,7 @@
         {% if object_list %}
             {% for kitob in object_list %}
             <li>
-                <h2>{{kitob.nomi}}</h2> 
+                <h2 id="{{ kitob.id }}" >{{kitob.nomi}}</h2> 
                 <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;">
 
 
