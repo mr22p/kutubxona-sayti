@@ -21,7 +21,7 @@ class AboutPageView(TemplateView):
 
 class FavoritPageView(ListView):
     model = Kitob
-    template_name = "favorit.html"
+    template_name = "favorit.html"    
 
 
     # bu funksiya is_favorite ustunning True 
@@ -30,11 +30,14 @@ class FavoritPageView(ListView):
         return Kitob.objects.filter(is_favorite=True)
     
 
-class KitobListView(ListView):
-    model = Kitob
-    template_name = "kitob.html"
+# class KitobListView(ListView):
+#     model = Kitob
+#     template_name = "kitob.html"
 
-
+def kitblist(request):
+    kitoblar = Kitob.objects.all()
+    
+    return render(request, 'kitob.html', {'kitoblar': kitoblar})
 # Bu yurakchani ustiga bosilganda htmldan 
 # keladigan post ni olib yurakchani to'ldiradi yoki to'ldirmaydi
 def yurakcha(request, yurak_id):
@@ -43,6 +46,7 @@ def yurakcha(request, yurak_id):
             Kitob,
             pk=request.POST["yurakcha"]
             )
+        target_id = request.POST['yurakcha']
 
     except Kitob.DoesNotExist:
         raise Http404("Yurakcha bilan nimadir xatolik ketti...")
@@ -55,4 +59,3 @@ def yurakcha(request, yurak_id):
         tanlangan_yurak.save()
 
         return HttpResponseRedirect(reverse("kitoblar"))
-    
