@@ -46,6 +46,7 @@ def yurakcha(request, yurak_id):
             Kitob,
             pk=request.POST["yurakcha"]
             )
+        target_id = request.POST['yurakcha']
 
     except Kitob.DoesNotExist:
         raise Http404("Yurakcha bilan nimadir xatolik ketti...")

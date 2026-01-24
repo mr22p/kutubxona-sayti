@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Bu css qism. Scroll qilguncha smooth scroll qilish uchun css ga kod qushildi -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+            /* Optional: Add padding if you have a fixed header that might cover the anchor point */
+            scroll-padding-top: 5rem; 
+        }
+    </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kitoblar</title>
@@ -44,6 +53,7 @@
                 <p> <strong>Muallif: </strong>{{kitob.muallif}} </p>
                 <p> <strong>Nashr yili: </strong>{{kitob.nashr_yili}} </p>
                 <p> <strong>Kitob linki: </strong>{{kitob.kitob_linki}}</p>
+                <p> <strong>Kitob Narxi: </strong> {{ kitob.kitob_narxi }} USD </p>
 
                 <a href="{{ kitob.kitob_linki }}">Kitobga o'tish</a> 
                 
