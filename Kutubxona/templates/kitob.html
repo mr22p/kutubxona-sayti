@@ -10,15 +10,16 @@
     {% load static %}
 
     {% block content %}
-        {% if object_list %}
-            {% for kitob in object_list %}
+        {% if kitoblar %}
+            {% for kitob in kitoblar %}
             <li>
                 <h2>{{kitob.nomi}}</h2> 
                 {{kitob.muallif}}, {{kitob.nashr_yili}}, {{kitob.kitob_turi}}, Narxi: {{ kitob.kitob_narxi }} USD <br>
-                <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;">
-
-
-                
+                {%if kitob.image %}
+                    <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;">
+                {% else %}
+                    <p>Rasm mavjud emas</p>
+                {% endif %}
                 <!-- Bu yerga yurakchani boshis kodi yozilgan -->
                 <form action="{% url 'yurakcha' kitob.id %}"  method="post">
                     {% csrf_token %}
@@ -32,7 +33,6 @@
                         <label for="choice{{forloop.counter}}">
                             <img src="{% static 'images/yurakcha/image2.png' %}" alt="YURAKCHA" style="max-width: 30px; max-height: 30px;">
                         </label>
-
                     {% endif %}
                 </form>
                 <!-- ######################################## -->
@@ -46,7 +46,12 @@
                 <p> <strong>Kitob linki: </strong>{{kitob.kitob_linki}}</p>
 
                 <a href="{{ kitob.kitob_linki }}">Kitobga o'tish</a> 
-                <a href="{{ kitob.file.url }}">Yuklab olish</a> 
+                
+               {% if kitob.file %} 
+                <a href="{{ kitob.file.url }}">Yuklab olish</a>
+               {% else %}
+                <p>Yuklab olish uchun fayl mavjud emas</p>
+               {% endif %}  
                 <a href="{% static 'images/' %}{{ kitob.image }}">Yuklab olish (rasm)</a>
                 <br>
                 <br>
