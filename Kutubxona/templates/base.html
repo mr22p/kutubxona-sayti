@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kutubxona</title>
+    <title>Document</title>
 </head>
 <body>
-    <header>
-        <a href = "{% url 'home' %}"> Bosh sahifa</a>
-        <a href = "{% url 'about' %}"> Kutubxona haqida</a>
-        <a href = "{% url 'favorit' %}"> Sevimli kitoblar</a>
-        <a href = "{% url 'kitoblar' %}"> Kitoblar ro'yxati</a>
-        <!-- <a href="/narxlar/">Kitoblar ro'yxati</a> -->
-    </header>
+    {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kutubxona</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
 
+<nav>
+    <a href="/">Bosh sahifa</a>
+    <a href="{% url 'about' %}">Kutubxona haqida</a>
+    <a href="{% url 'favorit' %}">Sevimli kitoblar</a>
+    <a href="{% url 'kitoblar' %}">Kitoblar ro'yxati</a>
+</nav>
+
+<div class="container">
     {% block content %}
-    {% endblock content %}
+    {% endblock %}
+</div>
 
 </body>
 </html>

@@ -15,7 +15,13 @@
             <p> <strong>Kitob linki: </strong>{{kitob.kitob_linki}}</p>
             <br>
             <br>
+              {% if kitob.file %} 
+                <a href="{{ kitob.file.url }}">Yuklab olish (file)</a>
+               {% else %}
+                <p>Yuklab olish uchun fayl mavjud emas</p>
+               {% endif %}  
         {% endfor %}
+        <a href="{% static 'images/' %}{{ kitob.image }}">Yuklab olish (rasm)</a>
     {% else %}
         <p>Sizda hali yoqtirgan kitoblaringiz yuq</p>
     {% endif %}

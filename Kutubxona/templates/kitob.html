@@ -29,7 +29,7 @@
                 {% else %}
                     <p>Rasm mavjud emas</p>
                 {% endif %}
-                <!-- Bu yerga yurakchani boshis kodi yozilgan -->
+                <!-- Bu yerga yurakchani bosish kodi yozilgan -->
                 <form action="{% url 'yurakcha' kitob.id %}"  method="post">
                     {% csrf_token %}
                     {% if kitob.is_favorite %}
@@ -58,7 +58,7 @@
                 <a href="{{ kitob.kitob_linki }}">Kitobga o'tish</a> 
                 
                {% if kitob.file %} 
-                <a href="{{ kitob.file.url }}">Yuklab olish</a>
+                <a href="{{ kitob.file.url }}">Yuklab olish (file)</a>
                {% else %}
                 <p>Yuklab olish uchun fayl mavjud emas</p>
                {% endif %}  
@@ -72,9 +72,7 @@
         {% else %}
             <h1>Bu sahifa bo'sh. Nimadir qo'shish uchun admin paneliga kirib qo'shing</h1>
         {% endif %}
-
-
-        <h4> yana qandaydir ma'lumot qo'shish uchun /admin paneliga kiring </h4>
+        
     {% endblock content %}
 </body>
 

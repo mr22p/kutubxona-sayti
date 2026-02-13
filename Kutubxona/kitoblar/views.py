@@ -11,6 +11,20 @@ def narxlar_page(request):
     kitoblar = Kitob.objects.all()
     return render(request, 'narxlar.html', {'kitoblar': kitoblar})
 
+def home(request):
+    return render(request, 'index.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def sevimli(request):
+    return render(request, 'sevimli.html')
+
+def kitoblar(request):
+    return render(request, 'kitoblar.html')
+
+
+
 
 # Create your views here.
 class HomePageView(TemplateView):

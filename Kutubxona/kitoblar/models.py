@@ -12,5 +12,4 @@ class Kitob(models.Model):
     is_favorite = models.BooleanField(default=False)
     
     def __str__(self):
-        return self.nomi
-    
+        return self.nomi 
