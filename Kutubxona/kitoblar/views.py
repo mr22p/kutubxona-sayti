@@ -6,7 +6,9 @@ from django.views.generic import ListView
 from django.urls import reverse
 
 from .models import Kitob
+from decouple import config
 
+ROOT = config('ROOT')
 def narxlar_page(request):
     kitoblar = Kitob.objects.all()
     return render(request, 'narxlar.html', {'kitoblar': kitoblar})
@@ -28,14 +30,14 @@ def kitoblar(request):
 
 # Create your views here.
 class HomePageView(TemplateView):
-    template_name = "home.html"
+    template_name = ROOT + "home.html"
 
 class AboutPageView(TemplateView):
-    template_name = "about.html"  
+    template_name = ROOT + "about.html"  
 
 class FavoritPageView(ListView):
     model = Kitob
-    template_name = "favorit.html"    
+    template_name = ROOT + "favorit.html"    
 
 
     # bu funksiya is_favorite ustunning True 
