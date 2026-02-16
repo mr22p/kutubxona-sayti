@@ -30,6 +30,9 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['*']
 
+    ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'Kutubxona.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +126,5 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'

@@ -6,6 +6,7 @@ from django.views.generic import ListView
 from django.urls import reverse
 
 from .models import Kitob
+from decouple import config
 
 def narxlar_page(request):
     kitoblar = Kitob.objects.all()
