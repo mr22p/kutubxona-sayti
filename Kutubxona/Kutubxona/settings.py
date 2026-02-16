@@ -28,8 +28,7 @@ DEBUG = config ('DEBUG', default=False, cast= bool)
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS =config('ALLOWED_HOST')
-
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
