@@ -1,0 +1,140 @@
+<DOCTYPE html>
+<html lang="en"    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+    <!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+
+    <style>
+        body {
+            background: white;
+            color: black;
+            font-family: Arial;
+            transition: 0.3s;
+        }
+
+        body.dark {
+            background: #121212;
+            color: white;
+        }
+
+        .box {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>⚙️ Settings</h2>
+
+    <!-- 🔊 Ovoz -->
+    <label>Ovoz:</label><br>
+    <input type="range" min="0" max="100" value="50" id="volume"><br><br>
+
+    <!-- 🎵 Musiqa -->
+    <label>
+        <input type="checkbox" id="musicToggle">
+        Musiqa yoqish
+    </label><br><br>
+
+    <audio id="music" loop>
+        <source src="/static/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 🌍 Til -->
+    <label>Til:</label><br>
+    <select id="language">
+        <option value="uz">O‘zbek</option>
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+    </select><br><br>
+
+    <!-- 🌙 Dark / Light -->
+    <label>
+        <input type="checkbox" id="themeToggle">
+        Dark mode
+    </label><br><br>
+
+    <!-- 🚪 Logout -->
+    <a href="{% url 'logout' %}">
+        <button>Akkauntdan chiqish</button>
+    </a>
+</div>
+
+<script>
+    const body = document.body;
+    const volume = document.getElementById("volume");
+    const music = document.getElementById("music");
+    const musicToggle = document.getElementById("musicToggle");
+    const themeToggle = document.getElementById("themeToggle");
+    const language = document.getElementById("language");
+
+    /* 🌙 Dark mode */
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark");
+        themeToggle.checked = true;
+    }
+
+    themeToggle.onchange = () => {
+        body.classList.toggle("dark");
+        localStorage.setItem("theme", body.classList.contains("dark") ? "dark" : "light");
+    };
+
+    /* 🔊 Ovoz */
+    volume.oninput = () => {
+        music.volume = volume.value / 100;
+        localStorage.setItem("volume", volume.value);
+    };
+
+    if (localStorage.getItem("volume")) {
+        volume.value = localStorage.getItem("volume");
+        music.volume = volume.value / 100;
+    }
+
+    /* 🎵 Musiqa */
+    musicToggle.onchange = () => {
+        if (musicToggle.checked) {
+            music.play();
+            localStorage.setItem("music", "on");
+        } else {
+            music.pause();
+            localStorage.setItem("music", "off");
+        }
+    };
+
+    if (localStorage.getItem("music") === "on") {
+        musicToggle.checked = true;
+        music.play();
+    }
+
+    /* 🌍 Til */
+    if (localStorage.getItem("lang")) {
+        language.value = localStorage.getItem("lang");
+    }
+
+    language.onchange = () => {
+        localStorage.setItem("lang", language.value);
+        alert("Til saqlandi (demo)");
+    };
+</script>
+
+</body>
+</html>
+

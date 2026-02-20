@@ -4,4 +4,4 @@ from .models import Kitob
 @admin.register(Kitob)
 class KitobAdmin(admin.ModelAdmin):
     # Bu yerda Narxi maydonini kiritganingiz uchun u asosiy ro'yxatda ko'rinadi
-    list_display = ('nomi', 'muallif', 'Narxi')
+    list_display = ('nomi', 'muallif', 'kitob_narxi')  # 'Narxi' emas, 'narxi' deb yozing

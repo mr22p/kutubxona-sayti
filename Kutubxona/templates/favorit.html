@@ -7,7 +7,13 @@
     {% if object_list %}
         {% for kitob in object_list %}
             <h2>{{kitob.nomi}}</h2>
-            <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;" >
+            {% if kitob.image %}
+            <img src="{{ kitob.image.url }}" alt="{{ kitob.nomi }} rasm" style="max-width:200px; max-height:300px;">
+            {% else %}
+             <p>Rasm mavjud emas</p> 
+             {% endif %}
+
+            
             <p> <strong>Kitob turi: </strong>{{kitob.kitob_turi}} </p>
             <p> <strong>Muallif: </strong>{{kitob.muallif}} </p>
             <p> <strong>Nashr yili: </strong>{{kitob.nashr_yili}} </p>
