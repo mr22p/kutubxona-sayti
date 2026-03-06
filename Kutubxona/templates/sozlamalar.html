@@ -1,140 +1,129 @@
-<DOCTYPE html>
-<html lang="en"    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <title>Settings</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sozlamalar</title>
     <style>
         body {
-            background: white;
-            color: black;
-            font-family: Arial;
-            transition: 0.3s;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #5f6bdc, #8c6bdc);
+            min-height: 100vh;
         }
 
-        body.dark {
-            background: #121212;
-            color: white;
-        }
-
-        .box {
-            max-width: 400px;
-            margin: auto;
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             padding: 20px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .settings-card {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .settings-card h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
             border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         button {
-            padding: 6px 12px;
-            margin-top: 10px;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
             cursor: pointer;
         }
+
+        .save-btn { background: #28a745; }
+        .logout-btn { background: #e53935; margin-top: 10px; }
+        a { text-decoration: none; }
     </style>
 </head>
 <body>
 
-<div class="box">
-    <h2>⚙️ Settings</h2>
+    <div class="navbar">
+        <a href="{% url 'home' %}">Bosh sahifa</a>
+        <a href="{% url 'about' %}">Kutubxona haqida</a>
+        <a href="{% url 'favorit' %}">Sevimli kitoblar</a>
+        <a href="{% url 'kitoblar' %}">Kitoblar ro'yxati</a>
+        <a href="{% url 'sozlamalar' %}">Sozlamalar</a>
+    </div>
 
-    <!-- 🔊 Ovoz -->
-    <label>Ovoz:</label><br>
-    <input type="range" min="0" max="100" value="50" id="volume"><br><br>
+    <div class="container">
+        <div class="settings-card">
+            <h2>⚙ Sozlamalar</h2>
 
-    <!-- 🎵 Musiqa -->
-    <label>
-        <input type="checkbox" id="musicToggle">
-        Musiqa yoqish
-    </label><br><br>
+            <form action="{% url 'kabinet' %}" method="POST" autocomplete="off">
+                {% csrf_token %}
 
-    <audio id="music" loop>
-        <source src="/static/music.mp3" type="audio/mpeg">
-    </audio>
+                <label for="username">Foydalanuvchi nomi</label>
+                <input type="text" id="username" name="username" placeholder="Foydalanuvchi nomini kiriting" value="" autocomplete="one-time-code" required>
 
-    <!-- 🌍 Til -->
-    <label>Til:</label><br>
-    <select id="language">
-        <option value="uz">O‘zbek</option>
-        <option value="ru">Русский</option>
-        <option value="en">English</option>
-    </select><br><br>
+                <label for="password">Yangi parol</label>
+                <input type="password" id="password" name="password" placeholder="Yangi parolni kiriting" value="" autocomplete="new-password" required>
 
-    <!-- 🌙 Dark / Light -->
-    <label>
-        <input type="checkbox" id="themeToggle">
-        Dark mode
-    </label><br><br>
+                <button type="submit" class="save-btn">O'zgarishlarni saqlash</button>
+            </form>
 
-    <!-- 🚪 Logout -->
-    <a href="{% url 'logout' %}">
-        <button>Akkauntdan chiqish</button>
-    </a>
-</div>
+            <hr style="margin: 25px 0; border: 0; border-top: 1px solid #eee;">
 
-<script>
-    const body = document.body;
-    const volume = document.getElementById("volume");
-    const music = document.getElementById("music");
-    const musicToggle = document.getElementById("musicToggle");
-    const themeToggle = document.getElementById("themeToggle");
-    const language = document.getElementById("language");
+            <label>Tizim tili</label>
+            <select>
+                <option>O'zbek</option>
+                <option>Русский</option>
+                <option>English</option>
+            </select>
 
-    /* 🌙 Dark mode */
-    if (localStorage.getItem("theme") === "dark") {
-        body.classList.add("dark");
-        themeToggle.checked = true;
-    }
-
-    themeToggle.onchange = () => {
-        body.classList.toggle("dark");
-        localStorage.setItem("theme", body.classList.contains("dark") ? "dark" : "light");
-    };
-
-    /* 🔊 Ovoz */
-    volume.oninput = () => {
-        music.volume = volume.value / 100;
-        localStorage.setItem("volume", volume.value);
-    };
-
-    if (localStorage.getItem("volume")) {
-        volume.value = localStorage.getItem("volume");
-        music.volume = volume.value / 100;
-    }
-
-    /* 🎵 Musiqa */
-    musicToggle.onchange = () => {
-        if (musicToggle.checked) {
-            music.play();
-            localStorage.setItem("music", "on");
-        } else {
-            music.pause();
-            localStorage.setItem("music", "off");
-        }
-    };
-
-    if (localStorage.getItem("music") === "on") {
-        musicToggle.checked = true;
-        music.play();
-    }
-
-    /* 🌍 Til */
-    if (localStorage.getItem("lang")) {
-        language.value = localStorage.getItem("lang");
-    }
-
-    language.onchange = () => {
-        localStorage.setItem("lang", language.value);
-        alert("Til saqlandi (demo)");
-    };
-</script>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="logout-btn">Akkauntdan chiqish</button>
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
-
